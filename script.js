@@ -8,8 +8,14 @@ const ACCOUNT_LIST = [
       pic: "background-image: url('https://img.kemono.cr/thumbnail/data/aa/ee/aaee7aacf66f1ad4e9b7d76b5ff813f4b3ed7a195a59195a4768fe8aeb35f5a6.jpg'); background-size: 190%; background-position: 90% center; background-repeat: no-repeat;", 
       profile_path: 'larisa.html' },
       
+      
     // Contoh akun lain (gunakan format data_file.html)
-    { file: 'tania_data.html', profile: 'Tania Dewi', pic: '#00ced1', profile_path: 'tania.html' },
+    { file: 'tania_data.html', 
+      profile: 'Tania Dewi', 
+      pic: '#00ced1', 
+      profile_path: 'tania.html' },
+
+      
     { file: 'dion_data.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'dion.html' },
 ];
 
