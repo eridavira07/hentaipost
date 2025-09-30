@@ -2,9 +2,9 @@
 
 // Daftar semua akun, path file HTML kini berada di root
 const ACCOUNT_LIST = [
-    { file: 'larisa.html', profile: 'Larisa Santoso', pic: '#ff69b4', profile_path: 'larisa_profile.html' },
-    { file: 'tania.html', profile: 'Tania Dewi', pic: '#00ced1', profile_path: 'tania_profile.html' },
-    { file: 'dion.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'dion_profile.html' },
+    { file: 'larisa.html', profile: 'Larisa Santoso', pic: '#ff69b4', profile_path: 'larisa.html' },
+    { file: 'tania.html', profile: 'Tania Dewi', pic: '#00ced1', profile_path: 'tania.html' },
+    { file: 'dion.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'dion.html' },
     // Tambahkan lebih banyak akun di sini
 ];
 
