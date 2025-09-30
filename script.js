@@ -1,11 +1,10 @@
 // script.js
 
-// Daftar semua akun, kini menyertakan path profil
+// Daftar semua akun, path file HTML kini berada di root
 const ACCOUNT_LIST = [
-    // Tambahkan 'profile_path' untuk setiap akun
-    { file: 'larisa.html', profile: 'Larisa Santoso', pic: '#ff69b4', profile_path: 'profile/larisa_profile.html' },
-    { file: 'tania.html', profile: 'Tania Dewi', pic: '#00ced1', profile_path: 'profile/tania_profile.html' },
-    { file: 'dion.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'profile/dion_profile.html' },
+    { file: 'larisa.html', profile: 'Larisa Santoso', pic: '#ff69b4', profile_path: 'larisa_profile.html' },
+    { file: 'tania.html', profile: 'Tania Dewi', pic: '#00ced1', profile_path: 'tania_profile.html' },
+    { file: 'dion.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'dion_profile.html' },
     // Tambahkan lebih banyak akun di sini
 ];
 
@@ -14,27 +13,14 @@ const LOAD_INCREMENT = 5;
 let allPosts = []; 
 let currentVisiblePosts = 0;
 
-// =====================================
-// 1. Dark Mode Toggle (Tidak Berubah)
-// =====================================
-function setupDarkModeToggle() {
-    const modeToggle = document.getElementById('modeToggle');
-    if (modeToggle) {
-        modeToggle.addEventListener('click', function() {
-            const body = document.body;
-            body.classList.toggle('dark-mode');
-            this.textContent = body.classList.contains('dark-mode') ? '🌙 Mode Terang' : '☀️ Mode Gelap';
-        });
-    }
-}
-
 
 // =====================================
-// 2. Memuat Postingan & Menambahkan Tautan Profil
+// 1. Memuat Postingan & Menambahkan Tautan Profil
 // =====================================
 async function fetchAccountPosts() {
     const promises = ACCOUNT_LIST.map(async account => {
         try {
+            // Mengambil file dari root folder
             const response = await fetch(account.file);
             if (!response.ok) throw new Error(`Gagal memuat ${account.file}`);
             
@@ -83,14 +69,13 @@ async function fetchAccountPosts() {
 }
 
 // =====================================
-// 3. Logika Lazy Loading (Tidak Berubah Signifikan)
+// 2. Logika Lazy Loading (Tidak Berubah Signifikan)
 // =====================================
 function displayNextPosts(count) {
     const feedArea = document.getElementById('feed-area');
     const postsToDisplay = allPosts.slice(currentVisiblePosts, currentVisiblePosts + count);
 
     postsToDisplay.forEach(post => {
-        // Gunakan cloneNode(true) untuk memastikan node yang disuntikkan disalin
         feedArea.appendChild(post.cloneNode(true));
     });
 
@@ -99,7 +84,6 @@ function displayNextPosts(count) {
 }
 
 function setupLoadMoreButton() {
-    // Logika Lazy Load tetap sama
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', () => {
@@ -116,7 +100,7 @@ function updateLoadMoreButton() {
     if (currentVisiblePosts >= allPosts.length) {
         if (loadMoreBtn) loadMoreBtn.style.display = 'none';
         if (loadMoreContainer) {
-            loadMoreContainer.innerHTML = '<p style="text-align: center; color: #606770;">Semua postingan sudah dimuat.</p>';
+            loadMoreContainer.innerHTML = '<p style="text-align: center; color: #a0a0a0;">Semua postingan sudah dimuat.</p>';
         }
     } else if (loadMoreBtn) {
         loadMoreBtn.textContent = `Muat Lebih Banyak Postingan (${Math.min(LOAD_INCREMENT, allPosts.length - currentVisiblePosts)})`;
@@ -125,9 +109,9 @@ function updateLoadMoreButton() {
 
 
 // =====================================
-// 4. Inisialisasi
+// 3. Inisialisasi
 // =====================================
 document.addEventListener('DOMContentLoaded', () => {
-    setupDarkModeToggle();
+    // Mode Gelap dihapus.
     fetchAccountPosts();
 });

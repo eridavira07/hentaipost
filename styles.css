@@ -1,121 +1,106 @@
-/* styles.css (Versi Minimalis & Elegan) */
+/* styles.css (TEMA GELAP DEFAULT & Gaya Profil Terintegrasi) */
 
 /* ===================================== */
-/* CSS Umum & Light Mode (Minimalis) */
+/* CSS Umum (Dark Mode Default) */
 /* ===================================== */
 body {
-    /* Latar belakang yang sangat halus, hampir putih */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #F7F9FB; 
-    color: #1a1a1a; /* Teks lebih gelap */
+    background-color: #121212; /* Latar Belakang Sangat Gelap */
+    color: #e0e0e0; /* Teks Terang */
     margin: 0;
     padding: 0;
-    transition: background-color 0.4s, color 0.4s;
 }
 
-/* Header (Gaya lebih halus, tetap biru untuk kontras visual) */
+/* Header (Gaya Teal Dark Mode) */
 .header {
-    background-color: #00796B; /* Aksen Teal/Emerald yang lebih elegan */
+    background-color: #004d40;
     color: white;
-    padding: 12px 30px; /* Padding lebih besar */
+    padding: 12px 30px;
     font-size: 22px;
-    font-weight: 600; /* Sedikit kurang tebal */
+    font-weight: 600;
     position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Shadow lebih halus */
-}
-
-/* Tombol Mode Gelap */
-#modeToggle {
-    background-color: white;
-    color: #1a1a1a;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px; /* Sudut lebih bulat seperti pil */
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.1);
 }
 
 /* Container Utama */
 .main-container {
     display: flex;
     justify-content: center;
-    padding: 30px 20px; /* Padding lebih besar */
+    padding: 30px 20px;
 }
 
 /* Area Konten Utama */
 .feed-area {
     width: 100%;
-    max-width: 680px; /* Lebar lebih luas sedikit */
+    max-width: 680px;
 }
 
 /* Styling Kartu Postingan */
 .post {
-    background-color: white;
-    border-radius: 12px; /* Sudut lebih bulat */
-    /* Shadow sangat halus, ini adalah kunci tampilan berkelas */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
-    border: 1px solid #e0e0e0; /* Border sangat halus */
-    margin-bottom: 25px; /* Jarak antar postingan lebih besar */
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    margin-bottom: 25px;
     padding: 20px;
-    transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+    transition: box-shadow 0.3s;
 }
 
-/* Postingan: Hover Efek (Opsional, untuk sentuhan profesional) */
 .post:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 /* Informasi Profil */
 .post-header {
     display: flex;
     align-items: center;
-    margin-bottom: 15px; /* Jarak lebih besar dari konten */
+    margin-bottom: 15px;
 }
 
 .profile-pic {
-    width: 48px; /* Lebih besar */
-    height: 48px; /* Lebih besar */
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background-color: #ccc;
     margin-right: 15px;
     flex-shrink: 0;
-    border: 2px solid #fff; /* Border untuk efek elegan */
-    box-shadow: 0 0 0 1px #e0e0e0;
+    border: 2px solid #1e1e1e;
+    box-shadow: 0 0 0 1px #444;
 }
 
 .username {
-    font-weight: 600; /* Sedikit lebih tebal */
+    font-weight: 600;
     font-size: 16px;
-    color: #1a1a1a;
+    color: #e0e0e0;
 }
 
+.timestamp {
+    font-size: 13px;
+    color: #a0a0a0;
+    margin-left: 8px;
+}
+
+/* Tautan Nama Pengguna */
 .username-link {
-    text-decoration: none; /* Hilangkan garis bawah */
+    text-decoration: none;
     color: inherit;
     display: inline-block;
 }
 
 .username-link:hover .username {
-    text-decoration: underline; /* Munculkan garis bawah saat hover */
-}
-
-.timestamp {
-    font-size: 13px;
-    color: #777; /* Warna abu-abu yang lebih lembut */
-    margin-left: 8px;
+    text-decoration: underline;
 }
 
 /* Konten Postingan */
 .post-content {
-    font-size: 17px; /* Ukuran teks sedikit lebih besar */
+    font-size: 17px;
     margin-bottom: 15px;
-    line-height: 1.6; /* Jarak baris lebih longgar */
+    line-height: 1.6;
 }
 
 .post-image {
@@ -124,12 +109,12 @@ body {
     object-fit: cover;
     border-radius: 8px;
     margin-top: 10px;
-    border: 1px solid #eee;
+    border: 1px solid #444;
 }
 
-/* Tombol Load More (Gaya Teal) */
+/* Tombol Load More */
 #loadMoreBtn {
-    background-color: #00796B; /* Sesuai dengan header */
+    background-color: #004d40;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -141,45 +126,54 @@ body {
     transition: background-color 0.2s;
 }
 #loadMoreBtn:hover {
-    background-color: #004d40;
+    background-color: #00796B;
 }
-
 
 /* ===================================== */
-/* Dark Mode Styles (Lebih Kontras) */
+/* GAYA PROFIL AKUN (Terintegrasi) */
 /* ===================================== */
-body.dark-mode {
-    background-color: #121212; /* Sangat gelap */
-    color: #e0e0e0;
-}
-
-.dark-mode .header {
-    background-color: #004d40;
-    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.1);
-}
-
-.dark-mode #modeToggle {
-    background-color: #333;
-    color: #e0e0e0;
-}
-
-.dark-mode .post {
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
     background-color: #1e1e1e;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    border: 1px solid #333;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+    margin-top: 20px;
 }
-.dark-mode .post:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+.cover-photo {
+    height: 300px;
+    /* Background image akan diatur di inline CSS pada file profil HTML */
+    background-size: cover;
+    background-position: center;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    position: relative;
 }
-
-.dark-mode .username {
+.profile-info {
+    padding: 20px 40px;
+    display: flex;
+    align-items: flex-end;
+    margin-top: -100px;
+}
+.profile-pic-large {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 6px solid #1e1e1e;
+    box-shadow: 0 0 0 1px #444;
+    /* Warna background akan diatur di inline CSS pada file profil HTML */
+    margin-right: 20px;
+}
+.user-details h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
     color: #e0e0e0;
 }
-
-.dark-mode .timestamp {
+.user-details p {
     color: #a0a0a0;
 }
-
-.dark-mode #loadMoreBtn {
-    background-color: #004d40;
+.profile-feed {
+    padding: 40px;
+    padding-top: 0;
 }
