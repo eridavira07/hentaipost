@@ -11,11 +11,11 @@ const ACCOUNT_LIST = [
       
     // Contoh akun lain (gunakan format data_file.html)
     { file: 'tania_data.html', 
-      profile: 'Tania Dewi', 
-      pic: '#00ced1', 
+      profile: 'Tania', 
+      pic: "background-image: url('https://n3.kemono.cr/data/d5/16/d516225bfc11038f6afd4f1fbb00edb9f242970db35a1113519de12614fdff60.jpg?f=33743.jpg'); background-size: 190%; background-position: 90% 90%; background-repeat: no-repeat;",  
       profile_path: 'tania.html' },
 
-      
+
     { file: 'dion_data.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'dion.html' },
 ];
 
