@@ -1,12 +1,12 @@
-/* styles.css (TEMA GELAP DEFAULT & Gaya Profil Terintegrasi) */
+/* styles.css (TEMA GELAP DEFAULT & Full-Width Layout) */
 
 /* ===================================== */
 /* CSS Umum (Dark Mode Default) */
 /* ===================================== */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212; /* Latar Belakang Sangat Gelap */
-    color: #e0e0e0; /* Teks Terang */
+    background-color: #121212; 
+    color: #e0e0e0;
     margin: 0;
     padding: 0;
 }
@@ -27,20 +27,33 @@ body {
     box-shadow: 0 1px 5px rgba(255, 255, 255, 0.1);
 }
 
-/* Container Utama */
+/* ===================================== */
+/* TATA LETAK UTAMA (RESPONSIVE) */
+/* ===================================== */
+
 .main-container {
-    display: flex;
+    display: grid;
+    /* Default untuk Mobile/Layar Kecil: Hanya 1 kolom (Feed) */
+    grid-template-columns: 1fr; 
+    gap: 0; /* Tidak ada jarak */
+    padding: 20px 0; 
     justify-content: center;
-    padding: 30px 20px;
 }
 
-/* Area Konten Utama */
 .feed-area {
     width: 100%;
-    max-width: 680px;
+    /* Batasi lebar Feed di tengah saat di mobile */
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 0 15px; /* Padding samping untuk mobile */
 }
 
-/* Styling Kartu Postingan */
+/* Kolom Samping (sidebar) disembunyikan secara default di layar kecil */
+.sidebar {
+    display: none;
+}
+
+/* Postingan dan Elemen Konten */
 .post {
     background-color: #1e1e1e;
     border-radius: 12px;
@@ -48,20 +61,78 @@ body {
     border: 1px solid #333;
     margin-bottom: 25px;
     padding: 20px;
-    transition: box-shadow 0.3s;
 }
-
 .post:hover {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
-/* Informasi Profil */
+/* Sidebar Styling (jika ditampilkan) */
+.sidebar {
+    padding: 0 20px;
+    color: #e0e0e0;
+}
+.sidebar h3 {
+    color: #00ced1;
+    margin-top: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333;
+}
+.sidebar-item {
+    padding: 8px 0;
+    font-size: 15px;
+    color: #a0a0a0;
+}
+.sidebar-item:hover {
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+
+/* ===================================== */
+/* MEDIA QUERY: Tampilan Desktop (Full-Width) */
+/* ===================================== */
+@media (min-width: 1000px) {
+    .main-container {
+        /* PENTING: Atur tata letak 3 kolom di desktop */
+        grid-template-columns: 250px minmax(600px, 680px) 250px; 
+        gap: 30px;
+        max-width: 1250px; /* Batasi container agar tidak terlalu lebar di monitor ultra */
+        margin: 0 auto;
+    }
+
+    /* Tampilkan Kolom Samping di Desktop */
+    .sidebar {
+        display: block;
+        padding-top: 25px; /* Sejajarkan dengan postingan */
+        position: sticky;
+        top: 65px; /* Jarak dari header */
+        height: fit-content;
+    }
+    
+    .feed-area {
+        /* Hapus margin dan padding yang berlebihan di desktop */
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+
+    /* Pindahkan kontainer Load More agar tetap berada di bawah Feed Area */
+    #load-more-container {
+        grid-column: 2; /* Pastikan tombol di kolom tengah */
+        margin-top: 20px;
+    }
+}
+
+
+/* ===================================== */
+/* Postingan dan Elemen Lainnya (TETAP SAMA) */
+/* ===================================== */
+
 .post-header {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
-
 .profile-pic {
     width: 48px;
     height: 48px;
@@ -72,37 +143,29 @@ body {
     border: 2px solid #1e1e1e;
     box-shadow: 0 0 0 1px #444;
 }
-
 .username {
     font-weight: 600;
     font-size: 16px;
     color: #e0e0e0;
 }
-
 .timestamp {
     font-size: 13px;
     color: #a0a0a0;
     margin-left: 8px;
 }
-
-/* Tautan Nama Pengguna */
 .username-link {
     text-decoration: none;
     color: inherit;
     display: inline-block;
 }
-
 .username-link:hover .username {
     text-decoration: underline;
 }
-
-/* Konten Postingan */
 .post-content {
     font-size: 17px;
     margin-bottom: 15px;
     line-height: 1.6;
 }
-
 .post-image {
     width: 100%;
     max-height: 450px;
@@ -111,8 +174,6 @@ body {
     margin-top: 10px;
     border: 1px solid #444;
 }
-
-/* Tombol Load More */
 #loadMoreBtn {
     background-color: #004d40;
     color: white;
@@ -130,7 +191,7 @@ body {
 }
 
 /* ===================================== */
-/* GAYA PROFIL AKUN (Terintegrasi) */
+/* GAYA PROFIL AKUN */
 /* ===================================== */
 .profile-container {
     max-width: 900px;
@@ -142,7 +203,6 @@ body {
 }
 .cover-photo {
     height: 300px;
-    /* Background image akan diatur di inline CSS pada file profil HTML */
     background-size: cover;
     background-position: center;
     border-top-left-radius: 12px;
@@ -161,7 +221,6 @@ body {
     border-radius: 50%;
     border: 6px solid #1e1e1e;
     box-shadow: 0 0 0 1px #444;
-    /* Warna background akan diatur di inline CSS pada file profil HTML */
     margin-right: 20px;
 }
 .user-details h1 {
