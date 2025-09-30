@@ -1,9 +1,15 @@
-// script.js (Bagian Awal yang Diubah)
+// script.js 
 
 // Daftar semua akun
 const ACCOUNT_LIST = [
-    // PENTING: File di sini (larisa_data.html) adalah sumber konten untuk feed
-    { file: 'larisa_data.html', profile: 'Larisa Santoso', pic: '#ff69b4', profile_path: 'larisa.html' },
+    // PENTING: Gunakan larisa_data.html untuk sumber data postingan di feed
+    // Gunakan string style lengkap untuk 'pic' agar gambar kustom muncul di feed utama
+    { file: 'larisa_data.html', 
+      profile: 'Larisa Santoso', 
+      pic: "background-image: url('https://img.kemono.cr/thumbnail/data/aa/ee/aaee7aacf66f1ad4e9b7d76b5ff813f4b3ed7a195a59195a4768fe8aeb35f5a6.jpg'); background-size: 190%; background-position: 90% center; background-repeat: no-repeat;", 
+      profile_path: 'larisa.html' },
+      
+    // Contoh akun lain (gunakan format data_file.html juga)
     { file: 'tania_data.html', profile: 'Tania Dewi', pic: '#00ced1', profile_path: 'tania.html' },
     { file: 'dion_data.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'dion.html' },
 ];
@@ -16,14 +22,16 @@ function createPostElement(account, content, timestamp) {
     const postDiv = document.createElement('div');
     postDiv.className = 'post post-item';
 
-    // Ambil style background dari account (untuk foto profil kecil)
-    const profilePicStyle = account.pic.startsWith('#') 
-        ? `background-color: ${account.pic};` 
-        : `background-image: url('${account.pic}'); background-size: cover; background-repeat: no-repeat;`;
+    // Logika untuk menentukan style foto profil:
+    let profilePicStyle = account.pic; 
 
-    // Ambil style kustom dari larisa.html jika ada (diasumsikan sudah disalin ke script.js jika perlu)
-    // Untuk tujuan ini, kita akan menggunakan warna default kecuali jika Anda menambahkan logika kustom.
-
+    // Jika style-nya HANYA sebuah kode warna hex, tambahkan prefix background-color:
+    if (account.pic.startsWith('#')) {
+        profilePicStyle = `background-color: ${account.pic};`;
+    } 
+    // Jika style adalah string style lengkap (seperti yang digunakan Larisa), 
+    // maka ia akan digunakan secara langsung, sehingga gambar kustom, zoom, dan fokusnya berfungsi.
+    
     const postContent = `
         <div class="post-header">
             <a href="${account.profile_path}" class="username-link">
@@ -49,6 +57,7 @@ function loadPosts() {
     const loadingMessage = document.getElementById('loading-message');
     let postsToLoadCount = 0;
     
+    // Tampilkan pesan loading
     loadingMessage.style.display = 'block';
 
     const promises = ACCOUNT_LIST.map(account => {
@@ -98,20 +107,23 @@ function loadPosts() {
             // Sembunyikan pesan loading
             loadingMessage.style.display = 'none';
 
-            // Tampilkan tombol "Muat Lebih Banyak" jika perlu (jika ada file yang belum dimuat)
+            // Tampilkan tombol "Muat Lebih Banyak" jika perlu
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             if (loadedFiles.length < ACCOUNT_LIST.length) {
                  loadMoreBtn.style.display = 'block';
             } else {
                  loadMoreBtn.style.display = 'none';
+                 // Perbarui pesan jika semua dimuat
+                 loadingMessage.textContent = 'Semua postingan sudah dimuat.';
+                 loadingMessage.style.display = 'block';
             }
 
         } else {
             // Jika tidak ada postingan baru dimuat
             if (loadedFiles.length === ACCOUNT_LIST.length) {
                 loadingMessage.textContent = 'Semua postingan sudah dimuat.';
+                loadingMessage.style.display = 'block';
             } else {
-                 // Sembunyikan pesan loading jika ada yang dimuat, tetapi tidak ada postingan.
                  loadingMessage.style.display = 'none';
             }
         }
