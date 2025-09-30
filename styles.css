@@ -1,0 +1,185 @@
+/* styles.css (Versi Minimalis & Elegan) */
+
+/* ===================================== */
+/* CSS Umum & Light Mode (Minimalis) */
+/* ===================================== */
+body {
+    /* Latar belakang yang sangat halus, hampir putih */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F7F9FB; 
+    color: #1a1a1a; /* Teks lebih gelap */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+/* Header (Gaya lebih halus, tetap biru untuk kontras visual) */
+.header {
+    background-color: #00796B; /* Aksen Teal/Emerald yang lebih elegan */
+    color: white;
+    padding: 12px 30px; /* Padding lebih besar */
+    font-size: 22px;
+    font-weight: 600; /* Sedikit kurang tebal */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* Shadow lebih halus */
+}
+
+/* Tombol Mode Gelap */
+#modeToggle {
+    background-color: white;
+    color: #1a1a1a;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px; /* Sudut lebih bulat seperti pil */
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Container Utama */
+.main-container {
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px; /* Padding lebih besar */
+}
+
+/* Area Konten Utama */
+.feed-area {
+    width: 100%;
+    max-width: 680px; /* Lebar lebih luas sedikit */
+}
+
+/* Styling Kartu Postingan */
+.post {
+    background-color: white;
+    border-radius: 12px; /* Sudut lebih bulat */
+    /* Shadow sangat halus, ini adalah kunci tampilan berkelas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    border: 1px solid #e0e0e0; /* Border sangat halus */
+    margin-bottom: 25px; /* Jarak antar postingan lebih besar */
+    padding: 20px;
+    transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+/* Postingan: Hover Efek (Opsional, untuk sentuhan profesional) */
+.post:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Informasi Profil */
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Jarak lebih besar dari konten */
+}
+
+.profile-pic {
+    width: 48px; /* Lebih besar */
+    height: 48px; /* Lebih besar */
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 15px;
+    flex-shrink: 0;
+    border: 2px solid #fff; /* Border untuk efek elegan */
+    box-shadow: 0 0 0 1px #e0e0e0;
+}
+
+.username {
+    font-weight: 600; /* Sedikit lebih tebal */
+    font-size: 16px;
+    color: #1a1a1a;
+}
+
+.username-link {
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: inherit;
+    display: inline-block;
+}
+
+.username-link:hover .username {
+    text-decoration: underline; /* Munculkan garis bawah saat hover */
+}
+
+.timestamp {
+    font-size: 13px;
+    color: #777; /* Warna abu-abu yang lebih lembut */
+    margin-left: 8px;
+}
+
+/* Konten Postingan */
+.post-content {
+    font-size: 17px; /* Ukuran teks sedikit lebih besar */
+    margin-bottom: 15px;
+    line-height: 1.6; /* Jarak baris lebih longgar */
+}
+
+.post-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+}
+
+/* Tombol Load More (Gaya Teal) */
+#loadMoreBtn {
+    background-color: #00796B; /* Sesuai dengan header */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 600;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+#loadMoreBtn:hover {
+    background-color: #004d40;
+}
+
+
+/* ===================================== */
+/* Dark Mode Styles (Lebih Kontras) */
+/* ===================================== */
+body.dark-mode {
+    background-color: #121212; /* Sangat gelap */
+    color: #e0e0e0;
+}
+
+.dark-mode .header {
+    background-color: #004d40;
+    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode #modeToggle {
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+.dark-mode .post {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+}
+.dark-mode .post:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .username {
+    color: #e0e0e0;
+}
+
+.dark-mode .timestamp {
+    color: #a0a0a0;
+}
+
+.dark-mode #loadMoreBtn {
+    background-color: #004d40;
+}
