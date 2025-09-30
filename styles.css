@@ -230,7 +230,7 @@ body {
 }
 
 .cover-photo {
-    /* MODIFIKASI: Tinggi foto dinding ditingkatkan menjadi 400px */
+    /* Tinggi foto dinding ditingkatkan menjadi 400px */
     height: 400px; 
     background-size: cover;
     background-position: center; /* Nilai ini di-override di inline HTML */
@@ -244,7 +244,7 @@ body {
     padding: 20px 40px;
     display: flex;
     align-items: flex-end;
-    /* MODIFIKASI: Sesuaikan margin-top negatif karena cover photo lebih tinggi */
+    /* Sesuaikan margin-top negatif karena cover photo lebih tinggi */
     margin-top: -120px; 
     position: relative; 
     z-index: 10; /* PENTING: Di atas cover photo */
@@ -262,7 +262,7 @@ body {
     position: relative;
     z-index: 20; /* Lapisan paling atas */
     
-    /* MODIFIKASI: Hapus background-color, tambahkan background-size/repeat */
+    /* Hapus background-color, tambahkan background-size/repeat */
     background-color: transparent; 
     background-size: cover; 
     background-repeat: no-repeat;
