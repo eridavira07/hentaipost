@@ -2,19 +2,18 @@
 
 // Daftar semua akun
 const ACCOUNT_LIST = [
-    // PENTING: Gunakan larisa_data.html untuk sumber data postingan di feed
-    // Gunakan string style lengkap untuk 'pic' agar gambar kustom muncul di feed utama
+    // PENTING: Gunakan string style lengkap untuk 'pic' agar gambar kustom muncul di feed utama
     { file: 'larisa_data.html', 
       profile: 'Larisa Santoso', 
       pic: "background-image: url('https://img.kemono.cr/thumbnail/data/aa/ee/aaee7aacf66f1ad4e9b7d76b5ff813f4b3ed7a195a59195a4768fe8aeb35f5a6.jpg'); background-size: 190%; background-position: 90% center; background-repeat: no-repeat;", 
       profile_path: 'larisa.html' },
       
-    // Contoh akun lain (gunakan format data_file.html juga)
+    // Contoh akun lain (gunakan format data_file.html)
     { file: 'tania_data.html', profile: 'Tania Dewi', pic: '#00ced1', profile_path: 'tania.html' },
     { file: 'dion_data.html', profile: 'Dion Permana', pic: '#ffa500', profile_path: 'dion.html' },
 ];
 
-// Array untuk melacak file mana yang sudah dimuat untuk mencegah pemuatan ganda
+// Array untuk melacak file mana yang sudah dimuat (hanya relevan untuk index.html)
 let loadedFiles = [];
 
 // Fungsi untuk membuat elemen HTML untuk setiap postingan
@@ -24,13 +23,9 @@ function createPostElement(account, content, timestamp) {
 
     // Logika untuk menentukan style foto profil:
     let profilePicStyle = account.pic; 
-
-    // Jika style-nya HANYA sebuah kode warna hex, tambahkan prefix background-color:
     if (account.pic.startsWith('#')) {
         profilePicStyle = `background-color: ${account.pic};`;
     } 
-    // Jika style adalah string style lengkap (seperti yang digunakan Larisa), 
-    // maka ia akan digunakan secara langsung, sehingga gambar kustom, zoom, dan fokusnya berfungsi.
     
     const postContent = `
         <div class="post-header">
@@ -54,14 +49,41 @@ function createPostElement(account, content, timestamp) {
 // Fungsi utama untuk memuat postingan
 function loadPosts() {
     const feedArea = document.getElementById('feed-area');
-    const loadingMessage = document.getElementById('loading-message');
+    // Hentikan jika feed-area tidak ada di halaman saat ini
+    if (!feedArea) return; 
+    
+    const loadingMessage = document.getElementById('loading-message'); 
+    
+    const currentPath = window.location.pathname;
+    const isIndexPage = currentPath.endsWith('/') || currentPath.endsWith('index.html');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    
+    // Tentukan akun mana yang akan dimuat
+    let accountsToLoad = ACCOUNT_LIST; 
     let postsToLoadCount = 0;
     
-    // Tampilkan pesan loading
-    loadingMessage.style.display = 'block';
+    if (!isIndexPage) {
+        // Logika untuk Halaman Profil
+        const profileFile = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+        
+        // Filter array hanya untuk akun yang cocok dengan halaman profil saat ini
+        accountsToLoad = ACCOUNT_LIST.filter(account => account.profile_path === profileFile);
+        
+        // Di halaman profil, sembunyikan tombol load more karena hanya memuat satu set data
+        if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+        
+        // Kosongkan feed saat beralih profil (jika fungsi ini dipanggil ulang)
+        feedArea.innerHTML = ''; 
+    } else {
+        // Logika untuk Index Page (halaman utama)
+        // Lanjutkan dengan accountsToLoad = ACCOUNT_LIST
+    }
 
-    const promises = ACCOUNT_LIST.map(account => {
-        if (loadedFiles.includes(account.file)) return Promise.resolve([]);
+    if (loadingMessage) loadingMessage.style.display = 'block';
+
+    const promises = accountsToLoad.map(account => {
+        // Di halaman utama, kita menghindari pemuatan ganda
+        if (isIndexPage && loadedFiles.includes(account.file)) return Promise.resolve([]);
 
         // Gunakan Fetch API untuk memuat konten file HTML
         return fetch(account.file)
@@ -74,22 +96,20 @@ function loadPosts() {
             .then(html => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
-                
-                // Cari semua elemen dengan class .post.post-item
                 const posts = doc.querySelectorAll('.post.post-item');
                 
                 const loadedPosts = [];
                 posts.forEach(postElement => {
                     const postContent = postElement.innerHTML;
                     const timestamp = postElement.getAttribute('data-time') || 'Waktu tidak diketahui';
-
-                    // Buat elemen postingan dan tambahkan ke array sementara
                     loadedPosts.push(createPostElement(account, postContent, timestamp));
                     postsToLoadCount++;
                 });
 
-                // Tandai file sebagai sudah dimuat
-                loadedFiles.push(account.file);
+                if (isIndexPage) {
+                    // Tandai file sebagai sudah dimuat (hanya untuk index.html)
+                    loadedFiles.push(account.file);
+                }
                 return loadedPosts;
             })
             .catch(error => {
@@ -101,30 +121,34 @@ function loadPosts() {
     Promise.all(promises).then(allPostsArrays => {
         const allPosts = allPostsArrays.flat();
 
-        if (allPosts.length > 0) {
-            // Gabungkan postingan yang dimuat ke dalam feed
-            allPosts.forEach(post => feedArea.appendChild(post));
-            // Sembunyikan pesan loading
-            loadingMessage.style.display = 'none';
+        // Sortir postingan berdasarkan waktu (asumsi data-time bisa diurutkan, misal, dengan logika waktu sungguhan)
+        // Untuk saat ini, kita biarkan urutan sesuai dengan ACCOUNT_LIST.
 
-            // Tampilkan tombol "Muat Lebih Banyak" jika perlu
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            if (loadedFiles.length < ACCOUNT_LIST.length) {
-                 loadMoreBtn.style.display = 'block';
+        if (allPosts.length > 0) {
+            allPosts.forEach(post => feedArea.appendChild(post));
+            if (loadingMessage) loadingMessage.style.display = 'none';
+
+            if (isIndexPage) {
+                // Atur tombol Load More hanya di halaman index
+                if (loadedFiles.length < ACCOUNT_LIST.length) {
+                     if (loadMoreBtn) loadMoreBtn.style.display = 'block';
+                } else {
+                     if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+                     if (loadingMessage) {
+                         loadingMessage.textContent = 'Semua postingan sudah dimuat.';
+                         loadingMessage.style.display = 'block';
+                     }
+                }
             } else {
-                 loadMoreBtn.style.display = 'none';
-                 // Perbarui pesan jika semua dimuat
-                 loadingMessage.textContent = 'Semua postingan sudah dimuat.';
-                 loadingMessage.style.display = 'block';
+                // Di halaman profil, tampilkan pesan jika berhasil dimuat.
+                if (loadingMessage) loadingMessage.style.display = 'none';
             }
 
         } else {
-            // Jika tidak ada postingan baru dimuat
-            if (loadedFiles.length === ACCOUNT_LIST.length) {
-                loadingMessage.textContent = 'Semua postingan sudah dimuat.';
+            // Jika tidak ada postingan dimuat
+            if (loadingMessage) {
+                loadingMessage.textContent = 'Tidak ada postingan untuk ditampilkan.';
                 loadingMessage.style.display = 'block';
-            } else {
-                 loadingMessage.style.display = 'none';
             }
         }
     });

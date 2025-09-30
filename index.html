@@ -7,41 +7,38 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    
     <div class="header">
         <a href="index.html" style="color:white; text-decoration:none;">Umpan Berita Simulasi</a>
     </div>
-
+    
     <div class="main-container">
         
-        <div class="left-sidebar sidebar">
+        <div class="sidebar left-sidebar">
             <h3>Navigasi</h3>
             <div class="sidebar-item">Beranda</div>
             <div class="sidebar-item">Pesan</div>
             <div class="sidebar-item">Notifikasi</div>
-            <div class="sidebar-item" style="margin-top: 15px;">
-                <p style="font-size: 14px; color: #a0a0a0; margin-top: 5px;">
-                    Simulasi akun: <br>
-                    <a href="larisa.html" class="username-link" style="color:#00ced1;">Larisa Santoso</a> <br>
-                    <a href="tania.html" class="username-link" style="color:#00ced1;">Tania Dewi</a>
-                </p>
-            </div>
+            <hr style="border-color:#333; margin: 10px 0;">
+            <h3>Grup Favorit</h3>
+            <div class="sidebar-item">Desain Grafis ID</div>
+            <div class="sidebar-item">Pecinta Kopi</div>
         </div>
-
+        
         <div class="feed-area" id="feed-area">
             </div>
-
-        <div class="right-sidebar sidebar">
-            <h3>Rekomendasi</h3>
-            <div class="sidebar-item">Grup Desain Grafis</div>
-            <div class="sidebar-item">Pekerjaan Baru</div>
-            <div class="sidebar-item">Widget Lain</div>
+        
+        <div class="sidebar right-sidebar">
+            <h3>Siapa yang Harus Diikuti</h3>
+            <div class="sidebar-item">Joko Santoso</div>
+            <div class="sidebar-item">Siti Rahayu</div>
+            <div class="sidebar-item">Budi Hartono</div>
         </div>
     </div>
     
-    <div id="load-more-container" style="text-align: center; margin-bottom: 20px;">
-        <button id="loadMoreBtn" style="display: none;">Muat Lebih Banyak Postingan</button>
-        <p id="loading-message" style="color: #a0a0a0;">Memuat postingan...</p>
+    <div id="load-more-container" style="text-align: center; padding: 20px;">
+        <button id="loadMoreBtn" style="display:none;">Muat Lebih Banyak</button>
+        <p id="loading-message" style="display:none; color: #a0a0a0;">Memuat postingan...</p>
     </div>
 
     <script src="script.js"></script>
